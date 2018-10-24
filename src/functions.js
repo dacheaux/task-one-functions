@@ -16,7 +16,7 @@ function random(min, max) {
 
 function minIntegerFromArray(array) {
 	if (array.length < 6) {
-		console.log('Array must have more than five values');
+		return 'Array must have more than five values';
 	}
 	const arrIntegers = array.filter(val => Number.isInteger(val));
 	if (!arrIntegers.length) return 'Array does not contain any integer';
