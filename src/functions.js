@@ -1,25 +1,29 @@
+function isANumber(num) {
+	return Number(num) === num && Number.isFinite(num);
+}
+
 function random(min, max) {
-	function isANumber(num) {
-		return Number(num) === num && Number.isFinite(num);
+	let [low, high] = [min, max];
+	if (max < min) {
+		low = max;
+		high = min;
 	}
-	if (isANumber(min) && isANumber(max)) {
-		return Math.floor(Math.random() * (max - min + 1) + min);
+	if (isANumber(low) && isANumber(high)) {
+		return Math.floor(Math.random() * (high - low + 1) + low);
 	}
 	return 'Input parameters must be valid numbers';
 }
 
 function minIntegerFromArray(array) {
 	if (array.length < 6) {
-		return 'Array must have more than five values';
+		console.log('Array must have more than five values');
 	}
-	const min = array.reduce((acc, val) => {
-		if (Number.isInteger(val)) {
-			if (val < acc) return val;
-			return acc;
-		}
-		return false;
-	}, 0);
-	if (min === false) console.log('Array does not contain any integer');
+	const arrIntegers = array.filter(val => Number.isInteger(val));
+	if (!arrIntegers.length) return 'Array does not contain any integer';
+	let min = arrIntegers[0];
+	arrIntegers.forEach((val) => {
+		if (val < min) min = val;
+	});
 	return min;
 }
 
@@ -35,7 +39,7 @@ function concatStringsByLength(arrayOfStrings, type) {
 	} else {
 		arr.sort((a, b) => a.length - b.length);
 	}
-	return arr.reduce((acc, str) => [...acc, ...str], []).join('');
+	return arr.join('');
 }
 
 module.exports = {
